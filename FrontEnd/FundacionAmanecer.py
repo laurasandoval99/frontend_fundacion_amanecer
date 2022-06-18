@@ -20,6 +20,8 @@ app= dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 df= pd.read_csv('Cartera_Final_2.csv',low_memory=False, nrows=10000)
 df.drop(['Unnamed: 0'], axis=1, inplace = True)
 df.reset_index()
+df = df[["NRO SOLICITUD","OBLIGACION","PAGARE","REGION","MONTO","FEC SOLICITUD","VALOR CUOTA"]]
+
 
 #df=px.data.iris()
 app.layout = html.Div(dbc.Container([
