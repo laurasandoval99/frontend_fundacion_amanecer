@@ -33,14 +33,9 @@ def display_card(header, mensaje, informacion):
     ]
     return card_content
 
-<<<<<<< HEAD
 df = pd.read_csv('Cartera_Final_2.csv',low_memory=False, nrows=10000)
-df = df.drop(['Unnamed: 0'], axis=1, inplace = True)
-df = df.reset_index()
-df = df[["NRO SOLICITUD","OBLIGACION","PAGARE","REGION","MONTO","FEC SOLICITUD","VALOR CUOTA"]]
 
-=======
->>>>>>> 7c76da085c25addc19c4e9b4765f405870bf3887
+
 
 # inicialize the app layout
 app.layout = html.Div(dbc.Container([
