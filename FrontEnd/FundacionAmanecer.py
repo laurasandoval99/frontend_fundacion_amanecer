@@ -19,10 +19,13 @@ import graficos as gr
 #os.chdir("C://Users//MIPC//Desktop//DS4A//FUNDACIÓN AMANECER//Visualización//FrontEnd")
 
 # inicializing the app
-app= dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
+app= dash.Dash(external_stylesheets=[dbc.themes.FLATLY],suppress_callback_exceptions=True)
 
+#Load the data 
+# df1 is for cards because Jorge made some new colums
 df = gr.load_data()
 fig= px.scatter(df, x='DIAS VENCIDO', y= 'CP')
+# df2 is for showing the table
 df2 = gr.show_data()
 
 def display_card(header, mensaje, informacion):
@@ -66,11 +69,12 @@ app.layout = html.Div(dbc.Container([
 
                     ]),
                     ##
-                    dbc.Row([dbc.Col([dcc.Upload(
-                        id = 'upload-data',
+                    html.Div(
+                        dbc.Row([dbc.Col([dcc.Upload(
+                        id = "upload-data",
                         children = html.Div([
-                            'Drag and Drop or ',
-                            html.A('Select Files')
+                            'Arrastre o ',
+                            html.A('seleccione el archivo ')
                         ]),
                         style = {
                             'width': '98%',
@@ -88,7 +92,10 @@ app.layout = html.Div(dbc.Container([
                     html.Div(id='output-div'),
                     html.Div(id='output-datatable'),
                     ])
-                    ]),
+                    ])
+
+                    , id = "upload-data1"),
+                    
 
                     dbc.Row(children=[
                         dbc.Col(width={"size": 8, "offset": 2}, children=[
@@ -167,6 +174,84 @@ app.layout = html.Div(dbc.Container([
 # close layout div and container
 ]),
 )
+
+
+## Check the number of rows!!!
+def parse_contents(contents, filename, date):
+    content_type, content_string = contents.split(',')
+
+    decoded = base64.b64decode(content_string)
+    try:
+        if 'csv' in filename:
+            # Assume that the user uploaded a CSV file
+            df_table = pd.read_csv(
+                io.StringIO(decoded.decode('utf-8')),low_memory=False,nrows=1000)
+            df_table = df_table[["OBLIGACION",'NRO SOLICITUD','MUNICIPIO CLIENTE', 'MONTO', 'VALOR CUOTA', 'CUOTAS PACTADAS','CUOTAS PENDIENTES', 'CALIFICACION CIERRE', 'VENCIDA', 'DIAS VENCIDO','CAPITAL VEN','MORA', 'FEC ULT.PAGO','FEC PROXIMO PAGO', 'VENCIMIENTO FINAL', 'Fecha']]
+        elif 'xls' in filename:
+            # Assume that the user uploaded an excel file
+            df_table = pd.read_excel(io.BytesIO(decoded),low_memory=False,nrows=1000)
+            df_table = df_table[["OBLIGACION",'NRO SOLICITUD','MUNICIPIO CLIENTE', 'MONTO', 'VALOR CUOTA', 'CUOTAS PACTADAS','CUOTAS PENDIENTES', 'CALIFICACION CIERRE', 'VENCIDA', 'DIAS VENCIDO','CAPITAL VEN','MORA', 'FEC ULT.PAGO','FEC PROXIMO PAGO', 'VENCIMIENTO FINAL', 'Fecha']]
+    except Exception as e:
+        print(e)
+        return html.Div([
+            'There was an error processing this file.'
+        ])
+
+    return html.Div([
+        html.H5(filename),
+        html.H6(datetime.datetime.fromtimestamp(date)),
+        html.P("Inset X axis data"),
+        dcc.Dropdown(id='xaxis-data',
+                     options=[{'label':x, 'value':x} for x in df_table.columns]),
+        html.P("Inset Y axis data"),
+        dcc.Dropdown(id='yaxis-data',
+                     options=[{'label':x, 'value':x} for x in df_table.columns]),
+        html.Button(id="submit-button", children="Create Graph"),
+        html.Hr(),
+
+        dash_table.DataTable(
+            data=df_table.to_dict('records'),
+            columns=[{'name': i, 'id': i} for i in df_table.columns],
+            page_size=15
+        ),
+        dcc.Store(id='stored-data', data=df_table.to_dict('records')),
+
+        html.Hr(),  # horizontal line
+
+        # For debugging, display the raw contents provided by the web browser
+        html.Div('Raw Content'),
+        html.Pre(contents[0:200] + '...', style={
+            'whiteSpace': 'pre-wrap',
+            'wordBreak': 'break-all'
+        })
+    ])
+
+
+#Callback to output of the csv file
+@app.callback(Output('output-datatable', 'children'),
+              Input('upload-data', 'contents'),
+              State('upload-data', 'filename'),
+              State('upload-data', 'last_modified'))
+def update_output(list_of_contents, list_of_names, list_of_dates):
+    if list_of_contents is not None:
+        children = [
+            parse_contents(c, n, d) for c, n, d in
+            zip(list_of_contents, list_of_names, list_of_dates)]
+        return children
+
+
+@app.callback(Output('output-div', 'children'),
+              Input('submit-button','n_clicks'),
+              State('stored-data','data'),
+              State('xaxis-data','value'),
+              State('yaxis-data', 'value'))
+def make_graphs(n, data, x_data, y_data):
+    if n is None:
+        return dash.no_update
+    else:
+        bar_fig = px.bar(data, x=x_data, y=y_data)
+        # print(data)
+        return dcc.Graph(figure=bar_fig)
 
 
 if __name__ == '__main__': 
