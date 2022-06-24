@@ -1,3 +1,7 @@
+import base64
+import datetime
+import io
+
 from turtle import width
 import dash
 import os 
@@ -9,8 +13,9 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objs as go
 import plotly.express as px
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output,State
 import graficos as gr
+
 #os.chdir("C://Users//MIPC//Desktop//DS4A//FUNDACIÓN AMANECER//Visualización//FrontEnd")
 
 # inicializing the app
@@ -61,6 +66,31 @@ app.layout = html.Div(dbc.Container([
                         ))), color='light', style={'text-align': 'center'}, inverse=False), style={'padding': '12px'}),
 
                     ]),
+                    ##
+                    dbc.Row([dbc.Col([dcc.Upload(
+                        id = 'upload-data',
+                        children = html.Div([
+                            'Drag and Drop or ',
+                            html.A('Select Files')
+                        ]),
+                        style = {
+                            'width': '100%',
+                            'height': '60px',
+                            'lineHeight': '60px',
+                            'borderWidth': '1px',
+                            'borderStyle': 'dashed',
+                            'borderRadius': '5px',
+                            'textAlign': 'center',
+                            'margin': '10px'
+                        },
+                        # Allow multiple files to be uploaded
+                        multiple=True
+                    ),
+                    html.Div(id='output-div'),
+                    html.Div(id='output-datatable'),
+                    ])
+                    ]),
+
                     dbc.Row(children=[
                         dbc.Col(width={"size": 8, "offset": 2}, children=[
                             html.H2('Dataset Introduction', style={
@@ -126,7 +156,7 @@ app.layout = html.Div(dbc.Container([
                     )
                     ]),
 
-            dcc.Tab(label='mapa', className='custom_tab', selected_className='custom_tab_selected',children=[
+            dcc.Tab(label='Mapa', className='custom_tab', selected_className='custom_tab_selected',children=[
                 html.H3('capital vencido ${:,.2f}'.format(gr.cap_vencido()), style={'textAlign':'center'}),
                 html.Br(),
                 html.H3('capital pendiente ${:,.2f}'.format(gr.cap_pendiente()), style={'textAlign':'center'}),
