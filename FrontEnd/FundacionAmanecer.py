@@ -4,11 +4,11 @@ import io
 
 from turtle import width
 import dash
+from dash import dcc
+from dash import html
 import os 
-import dash_core_components as dcc
-import dash_html_components as html
 import dash_bootstrap_components as dbc
-import dash_table
+from dash import dash_table
 import pandas as pd
 import numpy as np
 import plotly.graph_objs as go
@@ -23,7 +23,7 @@ app= dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
 
 df = gr.load_data()
 fig= px.scatter(df, x='DIAS VENCIDO', y= 'CP')
-
+df2 = gr.show_data()
 
 def display_card(header, mensaje, informacion):
     card_content = [
@@ -38,7 +38,6 @@ def display_card(header, mensaje, informacion):
     ]
     return card_content
 
-df = pd.read_csv('Cartera_Final_2.csv',low_memory=False, nrows=10000)
 
 
 
@@ -74,7 +73,7 @@ app.layout = html.Div(dbc.Container([
                             html.A('Select Files')
                         ]),
                         style = {
-                            'width': '100%',
+                            'width': '98%',
                             'height': '60px',
                             'lineHeight': '60px',
                             'borderWidth': '1px',
@@ -96,9 +95,9 @@ app.layout = html.Div(dbc.Container([
                             html.H2('Dataset Introduction', style={
                                     'textAlign': 'center'}),
                             dash_table.DataTable(
-                                data=df.to_dict('records'),
+                                data=df2.to_dict('records'),
                                 columns=[{'id': c, 'name': c}
-                                         for c in df.columns],
+                                         for c in df2.columns],
                                 page_size=8,
                                 sort_action = 'native',
                                 export_format="xlsx",
