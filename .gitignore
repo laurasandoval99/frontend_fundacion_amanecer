@@ -4,5 +4,7 @@
 /__pycache__/
 /components/__pycache__/
 /components/card/__pycache__/
+/components/dataframe/__pycache__/
+/components/graphs/__pycache__/
 
 /pages/__pycache__/

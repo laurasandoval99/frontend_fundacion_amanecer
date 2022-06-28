@@ -8,7 +8,7 @@ import plotly.graph_objs as go
 import plotly.express as px
 from dash.dependencies import Input, Output
 import dash_labs as dl
-import graficos as gr
+from callbacks import register_callbacks
 
 #os.chdir("C://Users//MIPC//Desktop//DS4A//FUNDACIÓN AMANECER//Visualización//FrontEnd")
 
@@ -60,7 +60,7 @@ app.layout = dbc.Container(children=[
 )
 
 # Call to external function to register all callbacks
-#register_callbacks(app)
+register_callbacks(app)
 
 # This call will be used with Gunicorn server
 server = app.server

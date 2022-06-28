@@ -9,7 +9,6 @@ import plotly.express as px
 from dash.dependencies import Input, Output
 import dash_labs as dl
 from dash_labs.plugins.pages import register_page
-import graficos as gr
 
 # dash-labs plugin call, menu name and route
 register_page(__name__, path="/maps")
