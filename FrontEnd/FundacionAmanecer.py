@@ -24,18 +24,24 @@ app= dash.Dash(external_stylesheets=[dbc.themes.FLATLY],suppress_callback_except
 #Load the data 
 # df1 is for cards because Jorge made some new colums
 df = gr.load_data()
+
+cap_ven = gr.cap_vencido()
+cap_pen = gr.cap_pendiente()
+deu_pen = gr.deudores_pen()
+
+
+
 fig= px.scatter(df, x='DIAS VENCIDO', y= 'CP')
 # df2 is for showing the table
 df2 = gr.show_data()
 
-def display_card(header, mensaje, informacion):
+def display_card(header,informacion):
     card_content = [
         dbc.CardHeader(header),
-
         dbc.CardBody(
             [
                 dcc.Markdown(dangerously_allow_html=True,
-                             children=["{0}<br>{1}</br>".format(mensaje, informacion)])
+                             children=["{0}<br>".format(informacion)])
             ]
         )
     ]
@@ -59,13 +65,13 @@ app.layout = html.Div(dbc.Container([
     html.Div(
         dcc.Tabs(id="header_tabs", value='Clients_graph', children=[
             dcc.Tab(label='Client Statistics', value='Clients_graph', className="custom_tab", selected_className="custom_tab_selected", children=[
-                    dbc.Row(children=[
-                        dbc.Col(dbc.Card(display_card("HOLA", "capital vencido", '${:,.2f}'.format(gr.cap_vencido())), color='light', style={
-                                'text-align': 'center'}, inverse=False), style={'padding': '12px'}),
-                        dbc.Col(dbc.Card(display_card("HOLA", "Capital pendiente", '${:,.2f}'.format(gr.cap_pendiente())), color='light', style={
-                                'text-align': 'center'}, inverse=False), style={'padding': '12px'}),
-                        dbc.Col(dbc.Card(display_card("HOLA", "porcentaje de clientes pendientes", '%{}'.format(gr.deudores_pen(
-                        ))), color='light', style={'text-align': 'center'}, inverse=False), style={'padding': '12px'}),
+                    dbc.Row(align='center', children=[
+                        dbc.Col(dbc.Card(display_card("CAPITAL VENCIDO", '${:,.2f}'.format(cap_ven)), outline=True, color="danger", style={
+                                'text-align': 'center','fontFamily': 'Times New Roman'}),style={'margin':18}),
+                        dbc.Col(dbc.Card(display_card("CAPITAL PENDIENTE", '${:,.2f}'.format(cap_pen)), outline=True, color="success", style={
+                                'text-align': 'center','fontFamily': 'Times New Roman'}),style={'margin':18}),
+                        dbc.Col(dbc.Card(display_card("PORCENTAJE CLIENTES PENIENTES", '%{}'.format(deu_pen)), outline=True, color="warning", style={
+                            'text-align': 'center','fontFamily': 'Times New Roman'}), style={'margin':18}),
 
                     ]),
                     ##
