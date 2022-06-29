@@ -24,7 +24,7 @@ class infocard:
                 dbc.CardBody(
                     [
                     dcc.Markdown(dangerously_allow_html=True,
-                    children=["{}<br>fecha ultimo cierre de cartera<br>{}".format(self.info, self.fecha)])
+                    children=["{}<br>fecha cierre de cartera<br>{}".format(self.info, self.fecha)])
                     ]
                 )
             ], outline=True, color=self.color, style={'text-align': 'center', 'fontFamily': 'Times New Roman','border':'2px solid'})

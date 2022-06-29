@@ -1,6 +1,6 @@
 import dash
 import os 
-from dash import dcc, html, dash_table
+from dash import dcc, html, dash_table, callback
 import dash_bootstrap_components as dbc
 import pandas as pd
 import numpy as np
@@ -27,19 +27,10 @@ card1 = infocard('${:,.2f}'.format(capital_ven),fecha_ult,'CAPITAL VENCIDO','Dan
 card2 = infocard('${:,.2f}'.format(total_saldo),fecha_ult,'CAPITAL PENDIENTE','Success')
 card3 = infocard('%{}'.format(por_mora),fecha_ult,'PORCETAJE DE DEUDORES','Warning')
 
-# trayendo df tiempo para graficar las lineas de tiempo
-df_tiempo
-color = df_tiempo['GENERO']
-x = df_tiempo['FECHA']
-y = df_tiempo['CAPITAL_VENCIDO']
-y1 = df_tiempo['SALDO_TOTAL']
-y2 = df_tiempo['CLIENTES_MORA']
-
-
 # instanciado un objetos de la clase linegraph
-grafico1 = linegraph('Capital vencido','Año','capital vencido',df_tiempo,x,y,color)
-grafico2 = linegraph('Saldo total','Año','Saldo total',df_tiempo,x,y1,color)
-grafico3 = linegraph('Porcentaje de clientes en mora','Año','Clientes en  mora',df_tiempo,x,y2,color)
+#grafico1 = linegraph('Capital vencido','Año','capital vencido',df_tiempo,x,y,color)
+#grafico2 = linegraph('Saldo total','Año','Saldo total',df_tiempo,x,y1,color)
+#grafico3 = linegraph('Porcentaje de clientes en mora','Año','Clientes en  mora',df_tiempo,x,y2,color)
 
 
 # specific layout for this page
@@ -61,21 +52,48 @@ layout = dbc.Container(children=[
         ]),
     ]),
     html.Br(),
-    
-    dbc.Row([
-        grafico1.display()
-    ]),
-    html.Br(),
+    dbc.Row(children=[
+        dbc.Col(children=[
+            html.Div(children=[
+                html.H4("Seleccione las opciones para el grafico"),
+                dbc.Col(children=[
+                    dcc.Dropdown(
+                    id="ticker",
+                    options=["CAPITAL_VENCIDO", "SALDO_TOTAL", "CLIENTES_MORA"],
+                    value="CAPITAL_VENCIDO",
+                    clearable=False,
+                    style = {'width':'60%','display':'inline-block'}
+                ),
+                dcc.Dropdown(
+                    id="ticker2",
+                    options=['GENERO','REGION','LINEA', 'TIPO_CREDITO','NOM_TIPOCLIENTE','UBICACIO_CLIENTE','PERIODICIDAD',
+                    'TIPO_CREDITO','NIVEL_DE_ESTUDIOS_NEW','SUCURSAL','ESTRATO','DESTINACION','TIPO_VIVIENDA'],
+                    value='GENERO',
+                    clearable=False,
+                    style = {'width':'60%','display':'inline-block'}
+                ),
 
-    dbc.Row([
-        grafico2.display()
-    ]),
-    html.Br(),
+                ]),
 
-    dbc.Row([
-        grafico3.display()
-    ])
+                dbc.Col(id="line_chart_cap_vencido") 
+            ])
+        ],className='col align-self-center')
+    ],style={'textAlign': 'center','margin':30})
 
 
-])
+# close container
+], fluid=True)
+
+# call backs
+@callback(
+    Output('line_chart_cap_vencido','children'),
+    Input('ticker','value'),
+    Input('ticker2','value')
+    )
+def line_chart_cap_vencido(ticker,ticker2):
+    df_tiempo = inicio_graph(ticker2)
+    x = df_tiempo['FECHA']
+    color = ticker2
+    grafico1 = linegraph(ticker,'Año',ticker,df_tiempo,x,ticker,color)
+    return grafico1.display()
 

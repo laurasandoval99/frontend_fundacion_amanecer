@@ -33,13 +33,17 @@ def ind_ult_mes():
 
 
 # Agrupar por fecha y variables de interes para los graficos de serie de tiempo
-df_tiempo = df.groupby(['FECHA','GENERO'],as_index=False).agg(CAPITAL_VENCIDO= ('CAPITAL_VEN','sum'),
+def inicio_graph(filter2):
+
+    df_tiempo = df.groupby(['FECHA',filter2],as_index=False).agg(CAPITAL_VENCIDO= ('CAPITAL_VEN','sum'),
                                      DEUDOR_SUMA = ('DEUDOR','sum'),
                                      DEUDOR_COUNT= ('DEUDOR','count'),
                                      SALDO_TOTAL= ('SALDO_OBLIGACION','sum'))
 
-#Poner clientes en mora en porcentajes
-df_tiempo['CLIENTES_MORA'] = df_tiempo['DEUDOR_SUMA']/df_tiempo['DEUDOR_COUNT']
+    #Poner clientes en mora en porcentajes
+    df_tiempo['CLIENTES_MORA'] = df_tiempo['DEUDOR_SUMA']/df_tiempo['DEUDOR_COUNT']
+
+    return df_tiempo
 
 
 

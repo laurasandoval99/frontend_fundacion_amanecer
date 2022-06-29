@@ -25,6 +25,18 @@ class linegraph:
                   xaxis_title=self.xaxis,
                   yaxis_title=self.yaxis,
                   )
+        fig.update_xaxes(
+            rangeslider_visible=True,
+            rangeselector=dict(
+            buttons=list([
+            dict(count=6, label="6m", step="month", stepmode="backward"),
+            dict(count=1, label="YTD", step="year", stepmode="todate"),
+           dict(count=1, label="1y", step="year", stepmode="backward"),
+            dict(count=5, label="5y", step="year", stepmode="backward"),
+            dict(step="all")
+            ])
+            )
+            )
         return fig
 
     def display(self):
