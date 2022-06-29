@@ -1,19 +1,27 @@
 # import os 
 import dash
 from dash import dcc, html, dash_table
-import dash_bootstrap_components as dbc
 import pandas as pd
 import numpy as np
 import plotly.graph_objs as go
 import plotly.express as px
 from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 import dash_labs as dl
+import dash_auth
 from callbacks import register_callbacks
 
 #os.chdir("C://Users//MIPC//Desktop//DS4A//FUNDACIÓN AMANECER//Visualización//FrontEnd")
 
 # inicializing the app
 app= dash.Dash(__name__, plugins=[dl.plugins.pages], external_stylesheets=[dbc.themes.FLATLY], update_title='Cargando...')
+
+auth = dash_auth.BasicAuth(
+    app,
+    {'born.to.lose': 'live.to.win',
+     'admin': 'unsecreto'}
+)
+
 app.config.suppress_callback_exceptions=True
 
 encabezado = dbc.Container(children=[
