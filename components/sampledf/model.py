@@ -19,7 +19,7 @@ dm=pd.read_csv('data\municipios_y_departamentos.csv')
 dm=dm.drop(columns=['Unnamed: 0'])
 df_completo=df.merge(dm, on='MUNICIPIO_CLIENTE',how="left")
 depto_en_mora=df_completo.drop_duplicates(subset=['ID'])
-depto_en_mora=depto_en_mora[(df_completo['MORA_STATUS']==1)]
+depto_en_mora=depto_en_mora[(depto_en_mora['MORA_STATUS']==1)]
 depto_en_mora=depto_en_mora["DEPARTAMENTO"].value_counts()
 depto_en_mora=depto_en_mora.to_frame().reset_index()
 depto_en_mora.columns=['DEPARTAMENTO','COUNT']
@@ -27,3 +27,11 @@ depto_en_mora=depto_en_mora.merge(df_completo[['DEPARTAMENTO','COD_DPTO']].drop_
 depto_en_mora.columns=['DEPARTAMENTO','CLIENTES_EN_MORA','CODIGO_DEPARTAMENTO']
   
 df_maptest = depto_en_mora
+
+mpio_en_mora=df_completo.drop_duplicates(subset=['ID'])
+mpio_en_mora=mpio_en_mora[(mpio_en_mora['MORA_STATUS']==1)]
+#depto_en_mora=depto_en_mora["DEPARTAMENTO"].value_counts()
+mpio_en_mora=mpio_en_mora["MUNICIPIO_CLIENTE"].value_counts()
+mpio_en_mora=mpio_en_mora.to_frame().reset_index()
+mpio_en_mora.columns=['MUNICIPIO_CLIENTE','CLIENTES_MORA']
+mpio_en_mora=mpio_en_mora.merge(df_completo[['MUNICIPIO_CLIENTE','COD_MUN','COD_DPTO','DEPARTAMENTO']].drop_duplicates(subset=['COD_MUN']), on='MUNICIPIO_CLIENTE',how="left")
