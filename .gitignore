@@ -1,10 +1,18 @@
 *.csv
 .env
 /data/*.csv
-/__pycache__/
-/components/__pycache__/
-/components/card/__pycache__/
-/components/dataframe/__pycache__/
-/components/graphs/__pycache__/
+/__pycache__/*
+/components/__pycache__/*
+/components/card/__pycache__/*
+/components/dataframe/__pycache__/*
+/components/graphs/__pycache__/*
+/components/maps/__pycache__/*
+/components/sampledf/__pycache__/*
+/components/logistic/__pycache__/*
+/components/table/__pycache__/*
+/notebooks/*
+/Models/*.data
+__pycache__/*.pyc
+
 
 /pages/__pycache__/
