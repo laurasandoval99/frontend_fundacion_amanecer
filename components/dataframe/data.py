@@ -1,4 +1,3 @@
-
 import pandas as pd
 from datetime import datetime
 import numpy as np
@@ -8,6 +7,9 @@ df = pd.read_csv('data/Data_Final.csv', sep=",",encoding="utf-8",low_memory=Fals
 
 # Dar formato de fecha
 df['FECHA'] = pd.to_datetime(df['FECHA'], format = "%Y-%m" )
+
+# df para prueba de la reg logistica
+df_prueba = pd.read_csv('data/prueba_reglog.csv')
 
 
 # calculando indicadores ultimo mes de carga
@@ -44,9 +46,3 @@ def inicio_graph(filter2):
     df_tiempo['CLIENTES_MORA'] = df_tiempo['DEUDOR_SUMA']/df_tiempo['DEUDOR_COUNT']
 
     return df_tiempo
-
-
-
-
-
-

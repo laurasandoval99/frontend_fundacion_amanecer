@@ -18,6 +18,13 @@ params1 = {
 }
 tabla_datos_departamentos = table(df_maptest,params1)
 
+params2 = {
+            'title': 'municipios', 
+            'description': 'Tabla de lista de municipios',
+            'columns': ['MUNICIPIO_CLIENTE','CLIENTES_MORA','COD_MUN','COD_DPTO','DEPARTAMENTO']
+}
+tabla_datos_municipios = table(mpio_en_mora,params2)
+
 
 register_page(__name__, path="/mapa2")
 
@@ -139,7 +146,7 @@ layout= html.Div(
          dbc.Row([
             dbc.Col([
                 html.Div([
-                    tabla_datos_departamentos.display()
+                    tabla_datos_municipios.display()
                 ],id="row_tabla")   
             ])
         ], className= "card"),

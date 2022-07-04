@@ -32,7 +32,7 @@ class table:
                                 html.P(self.params['description'],className='card-intro'),
                                 dash_table.DataTable(
                                     id='table_users_data',
-                                    page_size=7,
+                                    page_size=10,
                                     columns=table.columns(self),
                                     data = self.data.to_dict('records'),
                                     filter_action="native",

@@ -27,11 +27,6 @@ card1 = infocard('${:,.2f}'.format(capital_ven),fecha_ult,'CAPITAL VENCIDO','Dan
 card2 = infocard('${:,.2f}'.format(total_saldo),fecha_ult,'CAPITAL PENDIENTE','Success')
 card3 = infocard('%{}'.format(por_mora),fecha_ult,'PORCETAJE DE DEUDORES','Warning')
 
-# instanciado un objetos de la clase linegraph
-#grafico1 = linegraph('Capital vencido','Año','capital vencido',df_tiempo,x,y,color)
-#grafico2 = linegraph('Saldo total','Año','Saldo total',df_tiempo,x,y1,color)
-#grafico3 = linegraph('Porcentaje de clientes en mora','Año','Clientes en  mora',df_tiempo,x,y2,color)
-
 
 # specific layout for this page
 layout = dbc.Container(children=[
