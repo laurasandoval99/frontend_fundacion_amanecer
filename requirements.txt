@@ -8,3 +8,4 @@ dash-table==5.0.0
 pandas
 numpy
 requests
+joblib

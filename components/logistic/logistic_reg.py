@@ -90,6 +90,6 @@ def prediccion(data):
 
     layout = dbc.Row(children=[
         tabla_prediccion.display()
-    ],className='card', style={'offset':2})
+    ],className='card border-success', style={'offset':2})
 
     return layout

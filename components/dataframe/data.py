@@ -3,13 +3,15 @@ from datetime import datetime
 import numpy as np
 
 #cargando el data frame
-df = pd.read_csv('data/Data_Final.csv', sep=",",encoding="utf-8",low_memory=False,index_col=0)
+df = pd.read_csv('data/Data_Final.gzip',
+ sep=",", encoding="utf-8", low_memory=False, index_col=0, compression='gzip')
 
 # Dar formato de fecha
 df['FECHA'] = pd.to_datetime(df['FECHA'], format = "%Y-%m" )
 
 # df para prueba de la reg logistica
-df_prueba = pd.read_csv('data/prueba_reglog.csv')
+df_prueba = pd.read_csv('data/Prueba_reglog.gzip',
+sep=",", encoding="utf-8", low_memory=False, index_col=0, compression='gzip')
 
 
 # calculando indicadores ultimo mes de carga

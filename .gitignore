@@ -10,8 +10,6 @@
 /components/sampledf/__pycache__/*
 /components/logistic/__pycache__/*
 /components/table/__pycache__/*
-/notebooks/*
-/Models/*.data
 __pycache__/*.pyc
 
 

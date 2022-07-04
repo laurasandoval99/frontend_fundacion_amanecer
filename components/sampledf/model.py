@@ -1,7 +1,7 @@
 import pandas as pd
 
 # dataset de prueba para el mapa
-df = pd.read_csv('data\Data_final.csv',low_memory=False, 
+df = pd.read_csv('data/Data_Final.gzip',sep=",", encoding="utf-8", low_memory=False, index_col=0, compression='gzip', 
     dtype = { # indicate categorical variables
         'NRO SOLICITUD':'object',
         'COD MODALIDAD':'object',
@@ -13,10 +13,13 @@ df = pd.read_csv('data\Data_final.csv',low_memory=False,
         'CALIFICACION CIERRE': "category",
         'LINEA': "category",
         'TIPO CREDITO':"category"
-    })    
-df=df.drop(columns=['Unnamed: 0'])
-dm=pd.read_csv('data\municipios_y_departamentos.csv')
-dm=dm.drop(columns=['Unnamed: 0'])
+    })
+
+# df=df.drop(columns=['Unnamed: 0'])
+dm=pd.read_csv('data/municipios_departamentos.gzip',
+sep=",", encoding="utf-8", low_memory=False, index_col=0, compression='gzip')
+
+#dm=dm.drop(columns=['Unnamed: 0'])
 df_completo=df.merge(dm, on='MUNICIPIO_CLIENTE',how="left")
 depto_en_mora=df_completo.drop_duplicates(subset=['ID'])
 depto_en_mora=depto_en_mora[(depto_en_mora['MORA_STATUS']==1)]
