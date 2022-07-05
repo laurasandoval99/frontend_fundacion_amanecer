@@ -25,7 +25,7 @@ fecha_ult = ind_ult_mes()[3]
 
 card1 = infocard('${:,.2f}'.format(capital_ven),fecha_ult,'CAPITAL VENCIDO','Danger')
 card2 = infocard('${:,.2f}'.format(total_saldo),fecha_ult,'CAPITAL PENDIENTE','Success')
-card3 = infocard('%{}'.format(por_mora),fecha_ult,'PORCETAJE DE DEUDORES','Warning')
+card3 = infocard('{}%'.format(por_mora),fecha_ult,'PORCETAJE DE DEUDORES','Warning')
 
 
 # specific layout for this page

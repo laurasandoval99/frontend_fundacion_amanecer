@@ -28,7 +28,7 @@ class table:
                 [
                     dbc.Col(
                             [
-                                html.Div(self.params['title'],className='card-title'),
+                                html.Div(self.params['title'],className='card-title h5'),
                                 html.P(self.params['description'],className='card-intro'),
                                 dash_table.DataTable(
                                     id='table_users_data',

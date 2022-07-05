@@ -32,10 +32,11 @@ layout = dbc.Container(children = [
     Input('button1','n_clicks')
     )
 def display(n_clicks):
+    sample = df_prueba.sample(100).copy()
     result = ''
     if n_clicks is not None:
         if n_clicks>0:
-            result = prediccion(df_prueba)
+            result = prediccion(sample)
     return result
 
   

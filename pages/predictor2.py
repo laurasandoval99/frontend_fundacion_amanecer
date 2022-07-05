@@ -14,10 +14,11 @@ layout = dbc.Container(children = [
             style={'text-align': 'left', 'fontFamily': 'Times New Roman'}),
         ], lg=12),
     ]),
+    html.Br(),
     dbc.Row(children=[
         dbc.Button(id='button1', color='success', outline=True, children='Ejercutar prediccion',className='col-6'),
-        html.Br(),
-        html.Div(id='display-div')
-    ], className='col-8')
+    ], className='col-8'),
+    html.Br(),
+    html.Div(id='display-div')
 
 ],fluid=True)
