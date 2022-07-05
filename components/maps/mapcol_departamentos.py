@@ -40,12 +40,12 @@ class mapcol_departamentos:
             mapa = go.Choroplethmapbox(
                 geojson=departamentos, 
                 locations=self.df.CODIGO_DEPARTAMENTO, 
-                z=self.df['CLIENTES_EN_MORA'],
+                z=self.df['PORCENTAJE'],
                 colorscale="reds",
                 text=self.df.DEPARTAMENTO,
                 marker_opacity=0.9, 
                 marker_line_width=0.5,
-                colorbar_title = "COUNT",
+                colorbar_title = "PORCENTAJE (%)",
                 )
             annotations = [
                 dict(
@@ -83,12 +83,12 @@ class mapcol_departamentos:
             mapa = go.Choroplethmapbox(
                 geojson=municipios, 
                 locations=self.df.COD_MUN, 
-                z=self.df['CLIENTES_MORA'],
+                z=self.df['PORCENTAJE'],
                 colorscale="reds",
                 text=self.df.MUNICIPIO_CLIENTE,
                 marker_opacity=0.9, 
                 marker_line_width=0.5,
-                colorbar_title = "COP",
+                colorbar_title = "PORCENTAJE (%)",
                 )
             annotations = [
                 dict(

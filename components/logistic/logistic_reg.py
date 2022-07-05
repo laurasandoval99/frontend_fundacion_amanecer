@@ -3,7 +3,7 @@ import pandas as pd
 import dash_bootstrap_components as dbc
 from components.table.table import table
 import numpy as np
-import joblib
+import joblib 
 
 # Global variables
 model = 'Models/modelo_reglog1.data'

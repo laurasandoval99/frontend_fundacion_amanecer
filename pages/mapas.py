@@ -14,14 +14,14 @@ mapa_colombia_municipios= mapcol_departamentos('Mapa Municipios Colombia', 'div_
 params1 = {
             'title': 'Departamentos', 
             'description': 'Tabla de lista de departamentos',
-            'columns': [ 'DEPARTAMENTO', 'CLIENTES_EN_MORA', 'CODIGO_DEPARTAMENTO']
+            'columns': [ 'DEPARTAMENTO', 'CLIENTES_EN_MORA', 'PORCENTAJE']
 }
 tabla_datos_departamentos = table(df_maptest,params1)
 
 params2 = {
             'title': 'municipios', 
             'description': 'Tabla de lista de municipios',
-            'columns': ['MUNICIPIO_CLIENTE','CLIENTES_MORA','COD_MUN','COD_DPTO','DEPARTAMENTO']
+            'columns': ['MUNICIPIO_CLIENTE','DEPARTAMENTO','CLIENTES_MORA','PORCENTAJE']
 }
 tabla_datos_municipios = table(mpio_en_mora,params2)
 
