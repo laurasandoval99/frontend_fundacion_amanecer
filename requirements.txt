@@ -9,3 +9,4 @@ pandas
 numpy
 requests
 joblib
+statsmodels
