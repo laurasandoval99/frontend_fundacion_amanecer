@@ -41,7 +41,7 @@ encabezado = dbc.Container(children=[
                     if page["module"] != "pages.not_found_404" 
                 ],
                 nav=True,
-                label="Options",
+                label="Opciones",
             ),
             dbc.NavItem(dbc.NavLink("Nosotros", href="https://www.amanecer.org.co/")),
         ],

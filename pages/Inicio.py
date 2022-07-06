@@ -32,7 +32,7 @@ card3 = infocard('{}%'.format(por_mora),fecha_ult,'PORCETAJE DE DEUDORES','Warni
 layout = dbc.Container(children=[
     dbc.Row(children = [
         dbc.Col([
-            html.H2(children='Clients statistics'),
+            html.H2(children='Información de interes'),
         ], lg=12, className='mb-3', style={'text-align': 'center', 'fontFamily': 'Times New Roman'}),
     ]),
     dbc.Row([
