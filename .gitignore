@@ -1,6 +1,4 @@
-*.csv
 .env
-/data/*.csv
 /__pycache__/*
 /components/__pycache__/*
 /components/card/__pycache__/*
