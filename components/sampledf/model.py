@@ -16,8 +16,8 @@ df = pd.read_csv('data/Data_Final.gzip',sep=",", encoding="utf-8", low_memory=Fa
     })
 
 # df=df.drop(columns=['Unnamed: 0'])
-dm=pd.read_csv('data/municipios_departamentos.gzip',
-sep=",", encoding="utf-8", low_memory=False, index_col=0, compression='gzip')
+dm=pd.read_csv('data/municipios_y_departamentos.csv',
+sep=",", encoding="utf-8", low_memory=False, index_col=0)
 
 #dm=dm.drop(columns=['Unnamed: 0'])
 df_completo=df.merge(dm, on='MUNICIPIO_CLIENTE',how="left")
