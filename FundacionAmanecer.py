@@ -43,7 +43,7 @@ encabezado = dbc.Container(children=[
                 nav=True,
                 label="Opciones",
             ),
-            dbc.NavItem(dbc.NavLink("Nosotros", href="https://www.amanecer.org.co/")),
+            dbc.NavItem(dbc.NavLink("Nosotros", href="/nosotros")),
         ],
             brand="DS4A Project - Team 164",
             color="success",
