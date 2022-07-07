@@ -7,6 +7,8 @@ The following folders belong to website app:
 - components
 - data
 - pages
+
+
 FundacionAmanecer.py is the main .py that you have to run, installing previously the requirements.
 
 The codebase has an authentication implemented. 
@@ -14,4 +16,5 @@ The codebase has an authentication implemented.
 **The USER is**: born.to.lose 
 **PASSWORD:** live.to.win
  
- To visit our website please copy this [link](http://44.205.241.228:8050/)
+--- 
+ You are reading the main branch, however, our app is online in an AWS instance and the code for this one is in "reduciendoApp" branch because limitations in the instance.  To visit our website please copy this [link](http://44.205.241.228:8050/)
