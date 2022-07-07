@@ -2,14 +2,21 @@
 ### What will you find here?
 All of our codebase including the notebooks and models organized in folders.
 
-The following folders belong to website app:
-- assets
-- components
-- data
-- pages
+Our app has:
 
+### Features
+ - Python 3.9.0
+ - Dash 2.0
+ - dash-labs 1.1.0
+ - Multipage structure with dash-labs
+ - Reusable components with classes
+ 
+ 
+ ### To use the application:
+ - Install requirements with pip install -r requirements.txt
+ - Run python FundacionAmanecer.py 
 
-FundacionAmanecer.py is the main .py that you have to run, installing previously the requirements.
+---
 
 The codebase has an authentication implemented. 
 
