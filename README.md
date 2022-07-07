@@ -1,4 +1,3 @@
-#  We
 # :point_up: We are the team 164 and we welcome you to *Data Driven Methodology to improve collection Process for Microlenders* 
 ### What will you find here?
 All of our codebase including the notebooks and models organized in folders.
